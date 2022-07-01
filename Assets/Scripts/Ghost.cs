@@ -7,11 +7,14 @@ public class Ghost : MonoBehaviour
     public float moveSpeed = 3.9f;
 
     public int pinkyReleaseTimer = 5;
+    public int inkyReleaseTimer = 14;
+    public int clydeReleaseTimer = 21;
     public float ghostReleaseTimer = 0;
 
     public bool isInGhostHouse;
 
     public Node startingPosition;
+    public Node homeNode;
 
     public int scatterModeTimer1 = 7;
     public int chaseModeTimer1 = 20;
@@ -208,6 +211,57 @@ public class Ghost : MonoBehaviour
         return targetTile;
 
     }
+
+    Vector2 GetBlueGhostTargetTile()
+    {
+        //-Select the position two tiles in front of Pac-Man
+        //-Draw Vector from Blinky to that position
+        //-Double the length of the vector
+        Vector2 pacManPosition = pacMan.transform.localPosition;
+        Vector2 pacManOrientation = pacMan.GetComponent<PacMan>().orientation;
+
+        int pacManPositionX = Mathf.RoundToInt(pacManPosition.x);
+        int pacManPositionY = Mathf.RoundToInt(pacManPosition.y);
+
+        Vector2 pacManTile = new Vector2(pacManPositionX, pacManPositionY);
+        Vector2 targetTile = pacManTile + (2 * pacManOrientation);
+
+        //-Temporary Blinky Position
+        Vector2 tempBlinkyPosition = GameObject.Find("Ghost").transform.localPosition;
+
+        int blinkyPositionX = Mathf.RoundToInt(tempBlinkyPosition.x);
+        int blinkyPositionY = Mathf.RoundToInt(tempBlinkyPosition.y);
+
+        tempBlinkyPosition = new Vector2(blinkyPositionX, blinkyPositionY);
+
+        float distance = GetDistance(tempBlinkyPosition, targetTile);
+        distance *= 2;
+
+        targetTile = new Vector2(tempBlinkyPosition.x + distance, tempBlinkyPosition.y + distance);
+
+        return targetTile;
+    }
+
+    Vector2 GetOrangeGhostTargetTile()
+    {
+        //- Calculate the distance from Pac-Man
+        //- If the distance is greater than eight tiles targeting is the same as Blinky
+        //- If the distance is less than eight tiles, then target is his home node, so same as scatter mode.
+        Vector2 pacManPosition = pacMan.transform.localPosition;
+
+        float distance = GetDistance(transform.localPosition, pacManPosition);
+        Vector2 targetTile = Vector2.zero;
+
+        if (distance > 8)
+        {
+            targetTile = new Vector2(Mathf.RoundToInt(pacManPosition.x), Mathf.RoundToInt(pacManPosition.y));
+        }else if (distance < 8)
+        {
+            targetTile = homeNode.transform.position;
+        }   
+        return targetTile;
+    }
+
     Vector2 GetTargetTile()
     {
         Vector2 targetTile = Vector2.zero;
@@ -216,16 +270,44 @@ public class Ghost : MonoBehaviour
         {
             targetTile = GetRedGhostTargetTile();
 
-        }else if (ghostType == Ghosttype.Pink) {
+        }
+        else if (ghostType == Ghosttype.Pink)
+        {
 
             targetTile = GetPinkGhostTargetTile();
         }
-        return targetTile;
+        else if (ghostType == Ghosttype.Blue)
+        {
+
+            targetTile = GetBlueGhostTargetTile();
+        }
+        else if (ghostType == Ghosttype.Orange)
+        {
+
+            targetTile = GetOrangeGhostTargetTile();
+        }
+            return targetTile;
     }
 
     void releasePinkGhost()
     {
         if (ghostType == Ghosttype.Pink && isInGhostHouse)
+        {
+            isInGhostHouse = false;
+        }
+    }
+
+    void releaseBlueGhost()
+    {
+        if (ghostType == Ghosttype.Blue && isInGhostHouse)
+        {
+            isInGhostHouse = false;
+        }
+    }
+
+    void releaseOrangeGhost()
+    {
+        if (ghostType == Ghosttype.Orange && isInGhostHouse)
         {
             isInGhostHouse = false;
         }
@@ -237,6 +319,10 @@ public class Ghost : MonoBehaviour
 
         if (ghostReleaseTimer > pinkyReleaseTimer)
             releasePinkGhost();
+        if (ghostReleaseTimer > inkyReleaseTimer)
+            releaseBlueGhost();
+        if (ghostReleaseTimer > clydeReleaseTimer)
+            releaseOrangeGhost();
     }
 
 
@@ -244,7 +330,14 @@ public class Ghost : MonoBehaviour
     {
         Vector2 targetTile = Vector2.zero;
 
-        targetTile = GetTargetTile();
+        if (currentMode == Mode.Chase)
+        {
+
+            targetTile = GetTargetTile();
+        }else if (currentMode == Mode.Scatter)
+        {
+            targetTile = homeNode.transform.position;
+        }
 
         Node moveToNode = null;
 
