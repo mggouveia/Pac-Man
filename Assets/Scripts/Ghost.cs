@@ -24,6 +24,11 @@ public class Ghost : MonoBehaviour
     public int chaseModeTimer3 = 20;
     public int scatterModeTimer4 = 5;
 
+    public RuntimeAnimatorController ghostUp;
+    public RuntimeAnimatorController ghostDown;
+    public RuntimeAnimatorController ghostLeft;
+    public RuntimeAnimatorController ghostRight;
+
     private int modeChangeIteration = 1;
     private float modeChangeTimer = 0;
 
@@ -76,6 +81,8 @@ public class Ghost : MonoBehaviour
 
         previousNode = currentNode;
 
+        UpdateAnimatorController();
+
     }
 
     // Update is called once per frame
@@ -86,6 +93,30 @@ public class Ghost : MonoBehaviour
        Move();
 
        releaseGhosts(); 
+    }
+
+    void UpdateAnimatorController()
+    {
+        if (direction == Vector2.up)
+        {
+            transform.GetComponent<Animator>().runtimeAnimatorController = ghostUp;
+        }
+        else if (direction == Vector2.down)
+        {
+            transform.GetComponent<Animator>().runtimeAnimatorController = ghostDown;
+        }
+        else if (direction == Vector2.left)
+        {
+            transform.GetComponent<Animator>().runtimeAnimatorController = ghostLeft;
+        }
+        else if (direction == Vector2.right)
+        {
+            transform.GetComponent<Animator>().runtimeAnimatorController = ghostRight;
+        }
+        else
+        {
+            transform.GetComponent<Animator>().runtimeAnimatorController = ghostLeft;
+        }        
     }
 
     void Move()
@@ -110,6 +141,8 @@ public class Ghost : MonoBehaviour
                 targetNode = ChooseNextNode();
                 previousNode = currentNode;
                 currentNode = null;
+
+                UpdateAnimatorController();
             }
             else
             {

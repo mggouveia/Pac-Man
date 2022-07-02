@@ -21485,6 +21485,7 @@ GameObject:
   - component: {fileID: 710801809}
   - component: {fileID: 710801808}
   - component: {fileID: 710801810}
+  - component: {fileID: 710801811}
   m_Layer: 0
   m_Name: ghost_blue
   m_TagString: Ghost
@@ -21573,6 +21574,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3.9
   pinkyReleaseTimer: 5
+  inkyReleaseTimer: 14
+  clydeReleaseTimer: 21
   ghostReleaseTimer: 0
   isInGhostHouse: 1
   startingPosition: {fileID: 0}
@@ -21584,7 +21587,31 @@ MonoBehaviour:
   scatterModeTimer3: 5
   chaseModeTimer3: 20
   scatterModeTimer4: 5
+  ghostUp: {fileID: 9100000, guid: 463e5bb9d2b4d244fa0f2a9dac5eb30c, type: 2}
+  ghostDown: {fileID: 9100000, guid: 8a4c401eea8e4394fbe941bd105c8a90, type: 2}
+  ghostLeft: {fileID: 9100000, guid: 1a54b8e065568e04995ce98ab1a4a5b9, type: 2}
+  ghostRight: {fileID: 9100000, guid: faad5a448707b2a4189b9910d0f7308d, type: 2}
   ghostType: 2
+--- !u!95 &710801811
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710801807}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &714409084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36454,6 +36481,31 @@ Transform:
   m_Father: {fileID: 30757882}
   m_RootOrder: 89
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1220387982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2892538576646554558, guid: b3beb9023e195ff4bb4212db40e4634c, type: 3}
+  m_PrefabInstance: {fileID: 1712590351}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1220387986
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220387982}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1222169745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44502,6 +44554,7 @@ GameObject:
   - component: {fileID: 1486846356}
   - component: {fileID: 1486846355}
   - component: {fileID: 1486846357}
+  - component: {fileID: 1486846358}
   m_Layer: 0
   m_Name: ghost_orange
   m_TagString: Ghost
@@ -44590,6 +44643,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3.9
   pinkyReleaseTimer: 5
+  inkyReleaseTimer: 14
+  clydeReleaseTimer: 21
   ghostReleaseTimer: 0
   isInGhostHouse: 1
   startingPosition: {fileID: 0}
@@ -44601,7 +44656,31 @@ MonoBehaviour:
   scatterModeTimer3: 5
   chaseModeTimer3: 20
   scatterModeTimer4: 5
+  ghostUp: {fileID: 9100000, guid: 8dc0fa03979282d4dab18d7c7a6273c8, type: 2}
+  ghostDown: {fileID: 9100000, guid: 7aca267e5f6a31a4487e94927f2461c1, type: 2}
+  ghostLeft: {fileID: 9100000, guid: fd9da67986df80b44ac595a71dfe3b83, type: 2}
+  ghostRight: {fileID: 9100000, guid: a4c6555bf51e45f448aa42ea2cf51878, type: 2}
   ghostType: 3
+--- !u!95 &1486846358
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486846354}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1489339372
 GameObject:
   m_ObjectHideFlags: 0
@@ -51958,13 +52037,29 @@ PrefabInstance:
       value: Ghost
       objectReference: {fileID: 0}
     - target: {fileID: 3612203740418713046, guid: b3beb9023e195ff4bb4212db40e4634c, type: 3}
+      propertyPath: ghostUp
+      value: 
+      objectReference: {fileID: 9100000, guid: 0dcf2a05b17617d45beb8a5bef1c00ed, type: 2}
+    - target: {fileID: 3612203740418713046, guid: b3beb9023e195ff4bb4212db40e4634c, type: 3}
       propertyPath: homeNode
       value: 
       objectReference: {fileID: 1845900653}
     - target: {fileID: 3612203740418713046, guid: b3beb9023e195ff4bb4212db40e4634c, type: 3}
+      propertyPath: ghostDown
+      value: 
+      objectReference: {fileID: 9100000, guid: 0d47970ddea59024fb49a96f54dd5016, type: 2}
+    - target: {fileID: 3612203740418713046, guid: b3beb9023e195ff4bb4212db40e4634c, type: 3}
+      propertyPath: ghostLeft
+      value: 
+      objectReference: {fileID: 9100000, guid: 37d8844e9f2ff454ca8f629d7603036b, type: 2}
+    - target: {fileID: 3612203740418713046, guid: b3beb9023e195ff4bb4212db40e4634c, type: 3}
       propertyPath: ghostType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3612203740418713046, guid: b3beb9023e195ff4bb4212db40e4634c, type: 3}
+      propertyPath: ghostRight
+      value: 
+      objectReference: {fileID: 9100000, guid: b918f32fd70ae0048ad07c979df656f0, type: 2}
     - target: {fileID: 3612203740418713046, guid: b3beb9023e195ff4bb4212db40e4634c, type: 3}
       propertyPath: isInGhostHouse
       value: 1
@@ -65176,6 +65271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3.9
   pinkyReleaseTimer: 5
+  inkyReleaseTimer: 14
+  clydeReleaseTimer: 21
   ghostReleaseTimer: 0
   isInGhostHouse: 0
   startingPosition: {fileID: 528520074}
@@ -65187,7 +65284,31 @@ MonoBehaviour:
   scatterModeTimer3: 5
   chaseModeTimer3: 20
   scatterModeTimer4: 5
+  ghostUp: {fileID: 9100000, guid: 6b7b263ae9d4fc74ba161fa1552d34b2, type: 2}
+  ghostDown: {fileID: 9100000, guid: 188cdc643facd9f4d822151a440c288a, type: 2}
+  ghostLeft: {fileID: 9100000, guid: f96581fbebe1c104fa051fca776701c7, type: 2}
+  ghostRight: {fileID: 9100000, guid: 4e110317fb2756541a5bf3ccb8c50c89, type: 2}
   ghostType: 0
+--- !u!95 &6426056528802319946
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6426056528802319942}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &7823112574051659150
 PrefabInstance:
   m_ObjectHideFlags: 0
