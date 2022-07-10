@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class PacMan : MonoBehaviour
 {
+    public AudioClip chomp1;
+    public AudioClip chomp2;
+
     public Vector2 orientation;
 
     public float speed = 4.0f;
+    
     public Sprite idleSprite;
+
+    private bool playedChomp1 = false;
+
+    private AudioSource audio;
 
     private Vector2 direction = Vector2.zero;
     private Vector2 nextDirection;
@@ -19,12 +27,14 @@ public class PacMan : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audio = transform.GetComponent<AudioSource>();
+
         Node node = GetNodeAtPosition(transform.localPosition);
 
         if (node != null)
         {
             currentNode = node;
-            Debug.Log(currentNode);
+            //Debug.Log(currentNode);
         }
         direction = Vector2.left;
         orientation = Vector2.left;
@@ -35,7 +45,6 @@ public class PacMan : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
         CheckInput();
 
         Move();
@@ -46,6 +55,24 @@ public class PacMan : MonoBehaviour
 
         ConsumePellet();
     }
+
+    void PlayChompSound()
+    {
+        if (playedChomp1)
+        {
+            //- Play chomp 2, set playedChomp1 to false;
+            audio.PlayOneShot(chomp2);
+            playedChomp1 = false;
+
+        }
+        else
+        {
+            //-Play chomp 1, set playedChomp1 to true;
+            audio.PlayOneShot(chomp1);
+            playedChomp1 = true;
+        }
+    }
+
 
     void CheckInput()
     {
@@ -214,6 +241,17 @@ public class PacMan : MonoBehaviour
                     tile.didConsume = true;
                     GameObject.Find("Game").GetComponent<GameBoard>().score += 1;
                     pelletsConsumed++;
+                    PlayChompSound();
+
+                    if (tile.isSuperPellet)
+                    {
+                        GameObject[] ghosts = GameObject.FindGameObjectsWithTag("Ghost");
+
+                        foreach (GameObject go in ghosts)
+                        {
+                            go.GetComponent<Ghost>().StartFrightenedMode();
+                        }
+                    }
                 }
             }
         }
